@@ -26,7 +26,19 @@ client.on("messageCreate", (message) => {
     }
 
     if(message.content == "$help") {
-        message.channel.send("Lista comandi: $help lista comandi/ $privato per mandare un messaggio in privato/ $embed per mandare un embed")
+        var embed = new Discord.MessageEmbed()
+            .setColor("#ff0000")
+            .setTitle("Lista comandi")
+            .setDescription(`@${message.author.username} ecco la lista dei comandi:!`)
+            .addField("$help", "lista comandi", false)
+            .addField("$privato", "per mandare un messaggio in privato", true)
+            .addField("$moneta", "il bot tirerà una moneta", true)
+            .addField("$file", "il bot manderà un file", true)
+            .addField("$embed", "per mandare un embed", true)
+            .setFooter("Eccoti la lista dei comandi!")
+            .setTimestamp();
+
+        message.channel.send({ embeds: [embed] })
     }
 
     if(message.content == "$privato") {

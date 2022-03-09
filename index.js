@@ -12,6 +12,9 @@ client.on("ready", () => {
 var messaggi = ["Testa", "Croce"]
 
 client.on("messageCreate", (message) => {
+    if (message.content == "Hey newdinasty") {
+        message.channel.send(`Ciao @${message.author.username}, digita $help per scoprire i comandi del bot!`)
+    }
     if (message.content == "$spam") {
         message.channel.send("Spamtxt1")
         message.channel.send("Spamtxt2")
@@ -32,9 +35,10 @@ client.on("messageCreate", (message) => {
             .setDescription(`@${message.author.username} ecco la lista dei comandi:!`)
             .addField("$help", "lista comandi", true)
             .addField("$privato", "per mandare un messaggio in privato", true)
-            .addField("$moneta", "il bot tirerà una moneta", false)
+            .addField("$moneta", "il bot tirerà una moneta", true)
             .addField("$file", "il bot manderà un file", true)
             .addField("$embed", "per mandare un embed", true)
+            .addField("$spam", "per mandare messaggi di spam", true)
             .setFooter("Eccoti la lista dei comandi!")
             .setTimestamp();
 

@@ -56,7 +56,7 @@ client.on("messageCreate", (message) => {
     }
 
     if(message.content == "$file") {
-        message.channel.send("File: ", {files: ["Botm.jpg"]});
+        message.channel.send("File: ", {files: ["https://www.facebook.com/images/fb_icon_325x325.png"]});
     }
 
     if(message.content == "$embed") {

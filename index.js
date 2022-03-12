@@ -1,39 +1,77 @@
-const { Client, Intents } = require('discord.js');
-const wait = require('util').promisify(setTimeout);
+const Discord = require("discord.js")
+const client = new Discord.Client(
+    { intents:["GUILDS", "GUILD_MEMBERS", "GUILD_MESSAGES"] }
+)
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+client.login(process.env.token)
 
-client.once('ready', () => {
-    console.log('Bot online!');
-});
+client.on("ready", () => {
+    console.log("Bot Online")
+})
 
-client.on('interactionCreate', async (interaction) => {
-    if (!interaction.isCommand()) return;
+var messaggi = ["Testa", "Croce", "Testa", "Testa", "Croce", "Testa", "Croce", "Croce", "Testa", "Croce",]
 
-    if (interaction.commandName === 'ping') {
-        await interaction.reply('Pong!');
-    }
-});
-
-client.on('messageCreate', async (message) => {
-    if (!client.application?.owner) {
-        await client.application?.fetch();
+client.on("messageCreate", (message) => {
+    if (message.content == "Hey newdinasty") {
+        message.channel.send(`Ciao @${message.author.username}, digita $help per scoprire i comandi del bot!`)
     }
 
-    if (message.content.toLowerCase() === '!registra' && message.author.id === client.application?.owner.id) {
-        const data = {
-            name: 'ping',
-            description: 'Risponde con pong!',
-        }
+    if (message.content == "$spam") {
+        message.channel.send("Spamtxt1")
+        message.channel.send("Spamtxt2")
+        message.channel.send("Spamtxt3")
+        message.channel.send("Spamtxt4")
+        message.channel.send("Spamtxt5")
+        message.channel.send("Spamtxt6")
+        message.channel.send("Spamtxt7")
+        message.channel.send("Spamtxt8")
+        message.channel.send("Spamtxt9")
+        message.channel.send("Spamtxt10")
+    }
 
-        // Registra un comando GLOBALE
-        // const comando = await client.application?.commands.create(data);
-        // console.log(comando);
+    if(message.content == "$help") {
+        var embed = new Discord.MessageEmbed()
+            .setColor("#ff0000")
+            .setTitle("Lista comandi")
+            .setDescription(`@${message.author.username} ecco la lista dei comandi:!`)
+            .addField("$help", "lista comandi", true)
+            .addField("$privato", "per mandare un messaggio in privato", true)
+            .addField("$moneta", "il bot tirerà una moneta", true)
+            .addField("$file", "il bot manderà un file", true)
+            .addField("$embed", "per mandare un embed", true)
+            .addField("$spam", "per mandare messaggi di spam", true)
+            .setFooter("Eccoti la lista dei comandi!")
+            .setTimestamp();
 
-        // Registra un comando GUILD
-        const comando = await client.guilds.cache.get('871746640418066474')?.commands.create(data);
-        console.log(comando);
+        message.channel.send({ embeds: [embed] })
+    }
+
+    if(message.content == "$privato") {
+        message.author.send("Hey, ciao questo è un messaggio in privato")
+    }
+
+    if(message.content == "$moneta") {
+        var random = Math.floor(Math.random() * messaggi.length)
+        message.channel.send(message.author.toString() + " E' uscito:" + messaggi[random]);
+    }
+
+    if(message.content == "$file") {
+        message.channel.send("File: ", {files: ["Botm.jpg"]});
+    }
+
+    if(message.content == "$embed") {
+        var embed = new Discord.MessageEmbed()
+            .setColor("#ff0000")
+            .setTitle("Titolo")
+            .setDescription(`@${message.author.username} ha scritto il messaggio!`)
+            .addField("Titolo1", "Contenuto1", false)
+            .addField("Titolo2", "Contenuto2", true)
+            .addField("Titolo3", "Contenuto3", true)
+            .setFooter("Footer")
+            .setTimestamp();
+
+        message.channel.send({ embeds: [embed] })
     }
 })
 
-client.login(process.env.token)
+

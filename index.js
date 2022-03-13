@@ -6,7 +6,7 @@ const client = new Discord.Client(
 client.login(process.env.token)
 
 client.on("ready", () => {
-    console.log("Bot Online")
+    console.log("Bot Online to 2")
 })
 
 var messaggi = ["Testa", "Croce", "Testa", "Testa", "Croce", "Testa", "Croce", "Croce", "Testa", "Croce",]
@@ -86,7 +86,7 @@ client.on("guildMemberAdd", (member) => {
     client.channels.cache.get("952542863810506872").send("Benvenuto " + member.toString() + " in " + member.guild.name + ", sei il " + member.guild.member.Count + "° membro");
 })
 
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
     if(message.content.startsWith("$clear")){
         if(!message.member.hasPermission("MANAGE_MESSAGES")){
             message.channel.send("Non hai il permesso");
@@ -118,7 +118,7 @@ client.on("message", (message) => {
 
 
 
-client.on("message", message => {
+client.on("messageCreate", message => {
     if (message.content == "$serverinfo") {
         var server = message.member.guild;
 
@@ -150,7 +150,7 @@ client.on("message", message => {
 
 
 
-client.on("message", message => {
+client.on("messageCreate", message => {
     if (message.content.startsWith("$userinfo")) {
         if (message.content == "$userinfo") {
             var utente = message.member;

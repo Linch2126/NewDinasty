@@ -75,18 +75,8 @@ client.on("messageCreate", (message) => {
 
         message.channel.send({ embeds: [embed] })
     }
-})
 
 
-
-
-//Comandi Complessi
-
-client.on("guildMemberAdd", (member) => {
-    client.channels.cache.get("952542863810506872").send("Benvenuto " + member.toString() + " in " + member.guild.name + ", sei il " + member.guild.member.Count + "° membro");
-})
-
-client.on("message", (message) => {
     if(message.content.startsWith("$clear")){
         if(!message.member.hasPermission("MANAGE_MESSAGES")){
             message.channel.send("Non hai il permesso");
@@ -111,14 +101,8 @@ client.on("message", (message) => {
             msg.delete({ timeout:2000 })
         })
     }
-})
 
-
-
-
-
-
-client.on("message", message => {
+    
     if (message.content == "$serverinfo") {
         var server = message.member.guild;
 
@@ -144,13 +128,9 @@ client.on("message", message => {
         message.channel.send(embed)
 
     }
-});
 
 
 
-
-
-client.on("message", message => {
     if (message.content.startsWith("$userinfo")) {
         if (message.content == "$userinfo") {
             var utente = message.member;
@@ -193,8 +173,17 @@ client.on("message", message => {
         message.channel.send(embed)
 
     }
-});
 
+
+})
+
+
+
+//Comandi Complessi
+
+client.on("guildMemberAdd", (member) => {
+    client.channels.cache.get("952542863810506872").send("Benvenuto " + member.toString() + " in " + member.guild.name + ", sei il " + member.guild.member.Count + "° membro");
+})
 
 
 /* By Linch#2126 */
